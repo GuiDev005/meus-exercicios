@@ -25,14 +25,14 @@ else:
                 time.sleep(3)
                 os.system('cls')
             elif login == login_c and senha == senha_c:
-                    chances = -1
-                    time.sleep(3)
-                    os.system('cls')
+                chances = -1
+                time.sleep(3)
+                os.system('cls')
         if chances == -1:
-            ('SEU LOGIN FOI EFETUADO COM SUCESSO!')
+            print('SEU LOGIN FOI EFETUADO COM SUCESSO!')
             print('TELA DE ATENDIMENTO')
             print('1.CADASTRAR PRODUTOS')
             print('2.LISTA DE PRODUTOS')
             print('3.CADASTRAR PROFISSIONAIS')
         elif chances == 0:
-                     print('SEU LOGIN FOI BLOQUEADO!')
+             print('SEU LOGIN FOI BLOQUEADO!')
