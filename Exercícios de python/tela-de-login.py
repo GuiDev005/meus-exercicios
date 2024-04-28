@@ -7,9 +7,13 @@ senha_c = str(input('Cadastre sua senha: '))
 print('Cadastro validado!')
 time.sleep(3)
 os.system('cls')
+
+
 print('\033[1;34;46m---TELA DE LOGIN---\033[m')
 login = str(input('Digite seu login: '))
 senha = str(input('Digite sua senha: '))
+
+
 if login == login_c and senha == senha_c:
     print('TELA DE ATENDIMENTO')
     print('1.CADASTRAR PRODUTOS')
@@ -28,6 +32,8 @@ else:
                 chances = -1
                 time.sleep(3)
                 os.system('cls')
+
+                
         if chances == -1:
             print('SEU LOGIN FOI EFETUADO COM SUCESSO!')
             print('TELA DE ATENDIMENTO')
