@@ -10,6 +10,7 @@ procedimento Cadastro_funcionario()
 var
 
 inicio
+
    escreval("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
    escreval("&&&&&  $$$$$     $$$    $$$$        $$$      $$$$$$   $$$$$$$$   $$$$$$       $$$$    &&&&&")
    escreval("&&&&& $$   $$   $$ $$   $$  $$     $$ $$    $$    $$     $$      $$   $$    $$    $$  &&&&&")
@@ -35,6 +36,7 @@ procedimento logar_funcionario()
 var
 
 inicio
+
    escreval("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
    escreval("&&&&&  $$        $$$$         $$$$$$  $$$$$$  $$$     $$  &&&&&")
    escreval("&&&&&  $$      $$    $$     $$      $   $$    $$$$    $$  &&&&&")
@@ -51,19 +53,26 @@ inicio
    escreval("DIGITE A SUA SENHA:")
    leia(senha)
    limpatela
+
    para verifica_cadastro de 1 ate vetor_cadastro faca
+
       se (login = login_funcionario[verifica_cadastro]) e (senha = senha_funcionario[verifica_cadastro]) entao
          valida_login <- Verdadeiro
          interrompa
+
       fimse
+
    fimpara
 
 fimprocedimento
 
 Var
    // Variaveis de tela de carregamento
+
    j,k, i: inteiro
+
    // Variáveis de cadastro e login
+
    login, senha: caractere
    login_funcionario, senha_funcionario: vetor[1..100] de caractere
    tentativa, vetor_cadastro, verifica_cadastro, opcao_funcionario, voltar_funcionario: inteiro
@@ -74,25 +83,34 @@ Var
    verificar_quantidade: logico
 
    //Variárel contadoras
+
    cont: inteiro
 
    //Variáveis do comando escolha
+
    opcao, opcao_cadastro, opcao_cadastro_cliente, opcao_cadastro_produto, opcao_relatorio, opcao_vender_produto, opcao_comfirmar_venda, opcao_inserir_cad: inteiro
 
    //Variáveis da parte de cadastro, tanto de produtos, tanto de clientes
+
    cad_cliente, codigo_produto, quant_prod: vetor [1..100] de inteiro
    nome_cliente, nome_produto, cpf, tel_cliente, rg, validade, data_fabricacao: vetor[1..100] de caractere
    preco: vetor [1..100] de real
 
+   // Reposição
+   repor_produto, quantidade_reposicao: inteiro
+
    //Variáveis para parte de vendas
+
    nome_venda_prod, metodo_pagamento, status: vetor[1..100] de caractere
    quant_venda_prod, cod_prod_venda, cad_cliente_venda: vetor[1..100] de inteiro
 
    //variáveis conta vetor
-   contador_cliente,cont_vetor_cliente, cont_vetor_produto, cont_vetor_venda, contador_produto, localizar_produto: inteiro
 
-   //Variáveis de procurar estoque
-   estoque: inteiro
+   contador_cliente, cont_vetor_cliente, cont_vetor_produto, cont_vetor_venda, contador_produto, localizar_produto: inteiro
+
+   //Variáveis de procurar estoque e relatório de venda
+
+   estoque, localiza_nome_produto, localiza_nome_cliente, contador_venda: inteiro
 
 Inicio
 
@@ -107,6 +125,7 @@ Inicio
    tentativa <- 1
 
    repita
+
       opcao_funcionario <- 0
       valida_login <- falso
       escreval("SELECIONE SUA OPÇÃO:")
@@ -117,11 +136,15 @@ Inicio
       escolha opcao_funcionario
 
       caso 1
+
          cadastro_funcionario()
 
       caso 2
+
          logar_funcionario()
+
          se (valida_login = falso) e (opcao <> 4) entao
+
             repita
                escreval("VOCÊ DIGITOU LOGIN OU SENHA INCORRETO! VOCÊ ESTÁ NA ", tentativa, "° DE 3 TENTATIVAS")
                valida_login <- falso
@@ -129,18 +152,24 @@ Inicio
                escreval("[1] PARA CONTINUAR")
                escreval("[2] PARA VOLTAR")
                leia(voltar_funcionario)
+
                se valida_login = falso entao
                   tentativa <- tentativa + 1
                fimse
+
             ate (tentativa > 3) ou (valida_login = verdadeiro) ou (voltar_funcionario = 2)
+
             se tentativa > 3 entao
                escreva ("O SISTEMA FOI BLOQUEADO")
-            senao
+
             fimse
+
          fimse
+
          opcao_funcionario <- 0
 
       caso 3
+
          opcao <- 4
 
       outrocaso
@@ -152,6 +181,7 @@ Inicio
       opcao_funcionario <- 0
 
    ate (valida_login = verdadeiro) ou (opcao = 4)ou (tentativa > 3)
+
    se valida_login = verdadeiro entao
 
       escreval ("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
@@ -184,11 +214,11 @@ Inicio
          escreval("****BEM-VINDO A TELA INICIAL!****")
          escreval("*********************************")
          escreval("SELECIONE ALGUMA DAS OPÇÕES ABAIXO:")
-         escreval("1.CADASTRO.(CLIENTE/PRODUTO)")
+         escreval("1.CADASTRO(CLIENTE/PRODUTO) E REPOSIÇÃO.")
          escreval("2.VENDAS.")
          escreval("3.RELATÓRIOS.")
          escreval("4.SAIR")
-         escreva("SUA OPÇÃO: ")
+         escreval("SUA OPÇÃO: ")
          leia(opcao)
          limpatela
          escolha (opcao)
@@ -196,12 +226,15 @@ Inicio
          caso 1
 
             repita
+
                escreval("Escolha uma opção:")
                escreval("1.Cadastrar cliente")
                escreval("2.Cadastrar produtos")
-               escreval("3.Para voltar")
+               escreval("3.Repor estoque")
+               escreval("4.Para voltar")
                leia(opcao_cadastro)
-               escolha (opcao_cadastro)
+
+               escolha opcao_cadastro
 
                   limpatela
 
@@ -221,7 +254,7 @@ Inicio
 
                            leia(opcao_cadastro_cliente)
 
-                        ate  (opcao_cadastro_cliente = 2)
+                        ate opcao_cadastro_cliente = 2
 
                      fimse
 
@@ -282,7 +315,7 @@ Inicio
                         escreval("Aqui você pode cadastrar produtos. Você está cadastrando o seu ",cont_vetor_produto, "° produto")
                         escreval("Digite o nome do produto:")
                         leia(nome_produto[cont_vetor_produto])
-                        escreva("Digite a data de fabricação: ")
+                        escreval("Digite a data de fabricação: ")
                         leia(data_fabricacao[cont_vetor_produto])
                         escreval("Data de validade: ")
                         leia(validade[cont_vetor_produto])
@@ -305,18 +338,35 @@ Inicio
 
                caso 3
 
-                  opcao_cadastro <- 3
+                  repor_produto <- 0
+                  quantidade_reposicao <- 0
+
+                  escreval("REPOSIÇÃO DE ESTOQUE:")
+                  escreval("Digite o código do produto que deseja repor:")
+                  leia(repor_produto)
+                  escreval("NOME: ", nome_produto[repor_produto],"|  QUANTIDADE: ", quant_prod[repor_produto])
+                  escreval("Digite a quantidade que deseja adicionar: ")
+                  leia(quantidade_reposicao)
+                  quant_prod[repor_produto] <- quant_prod[repor_produto] + quantidade_reposicao
+
+
+               caso 4
+
+                  opcao_cadastro <- 4
+
+               outrocaso
+
+                  escreval("Opção inválida.")
 
                fimescolha
 
-            ate opcao_cadastro = 3
+            ate opcao_cadastro = 4
 
          caso 2
 
             repita
 
                estoque <- 1
-
                opcao_vender_produto <- 1
                encontrar_produtos <- falso
                verificar_quantidade <- falso
@@ -338,24 +388,37 @@ Inicio
                fimpara
 
                se encontrar_produtos = verdadeiro entao
+
                   escreval("Nome do produto: ", nome_produto[localizar_produto],"  PREÇO: ", preco[localizar_produto] ,"  Quantidade: ", quant_prod[localizar_produto], "  Fabricação: ", data_fabricacao[localizar_produto], "  Validade: ", validade[localizar_produto])
                   escreval("Digite a quantidade de produtos:")
                   leia(quant_venda_prod[cont_vetor_venda])
 
                   se quant_prod[localizar_produto] >= quant_venda_prod[cont_vetor_venda] entao
+
                      verificar_quantidade <- verdadeiro
 
-
-
                   fimse
+
                   se verificar_quantidade = verdadeiro entao
+
                      escreval("Deseja inserir número de cadastro do cliente?")
                      escreval("[1] Sim   e    [2] Não ")
                      leia(opcao_inserir_cad)
 
                      se opcao_inserir_cad = 1 então
+
                         escreval("Digite o casdastro de seu cliente: ")
                         leia(cad_cliente_venda[cont_vetor_venda])
+                        se cad_cliente_venda[cont_vetor_venda] >= cont_vetor_cliente entao
+
+                           cad_cliente_venda[cont_vetor_venda] <- 0
+
+                        fimse
+
+                     senao
+
+                        cad_cliente_venda[cont_vetor_venda] <- 0
+
                      fimse
 
                      escreval("O valor final foi, em R$:", quant_venda_prod[cont_vetor_venda] * preco[localizar_produto])
@@ -363,8 +426,6 @@ Inicio
                      leia(metodo_pagamento[cont_vetor_venda])
                      escreval("Deseja comfirmar a compra, [1] SIM ou [2] NÃO:")
                      leia(opcao_comfirmar_venda)
-
-
 
                      se opcao_comfirmar_venda = 1 entao
                         escreval("COMPRA COMFIRMADA COM SUCESSO!")
@@ -433,16 +494,36 @@ Inicio
 
                fimPara
 
-            caso 3 //relatorio de produtos vendidos e quais os clientes que compraram
+            caso 3
+
+               escreval("REGISTROS DE COMPRAS:")
+
+               cont_vetor_venda <- cont_vetor_venda - 1
+
+               para contador_venda de 1 ate cont_vetor_venda faca
+
+                  localiza_nome_cliente <- cad_cliente_venda[contador_venda]
+                  localiza_nome_produto <- cod_prod_venda[contador_venda]
+
+                  se localiza_nome_cliente = 0 entao
+
+                     escreval("CÓDIGO DO PRODUTO: ", cod_prod_venda[contador_venda]," NOME DO PRODUTO: ", nome_produto[localiza_nome_produto], " | QUANTIDADE VENDIDA: ", quant_venda_prod[contador_venda], " | NOME DO CLIENTE: VAZIO | MÉTODO DE PAGAMENTO: ", metodo_pagamento[contador_venda], "STATUS: ", status[contador_venda])
+
+                  senao
+
+                     escreval("CÓDIGO DO PRODUTO: ", cod_prod_venda[contador_venda]," NOME DO PRODUTO: ", nome_produto[localiza_nome_produto], " | QUANTIDADE VENDIDA: ", quant_venda_prod[contador_venda], " | NOME DO CLIENTE: ", nome_cliente[localiza_nome_cliente], " | MÉTODO DE PAGAMENTO: ", metodo_pagamento[contador_venda], "STATUS: ", status[contador_venda])
+
+                  fimse
+               fimpara
+
+               cont_vetor_venda <- cont_vetor_venda +1
 
             fimescolha
 
 
-
-
          fimescolha
-      ate (opcao = 4)
 
+
+      ate opcao = 4
    fimse
-
 Fimalgoritmo
